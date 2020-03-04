@@ -19,4 +19,11 @@ class Curator
     @artists.find {|artist| artist.id == id}
   end
 
+  def photographs_by_artist
+    @artists.inject({}) do |by_artist, artist|
+      by_artist[artist] = @photographs.select {|photo| photo.artist_id == artist.id}
+      by_artist
+    end 
+  end
+
 end
