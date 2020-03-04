@@ -131,4 +131,11 @@ class CuratorTest < Minitest::Test
     assert_equal [], @curator.photographs_taken_between(1910..1915)
   end
 
+  def test_it_can_create_photograph_objects_from_csv
+    @curator.load_photographs('./data/photographs.csv')
+    assert_equal %w(1 2 3 4), @curator.photographs.map(&:id)
+    assert_equal 4, @curator.photographs.size
+    assert_instance_of Photograph, @curator.photographs.sample
+  end
+
 end

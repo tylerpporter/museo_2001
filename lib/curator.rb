@@ -1,4 +1,8 @@
+require './lib/loadable.rb'
+require './lib/photograph.rb'
+
 class Curator
+  include Loadable
   attr_reader :photographs,
               :artists
 
@@ -41,6 +45,10 @@ class Curator
 
   def photographs_taken_between(range)
     @photographs.select {|photo| range.include?(photo.year.to_i)}
+  end
+
+  def load_photographs(file_path)
+    from_csv(file_path, Photograph, @photographs)
   end
 
 end
