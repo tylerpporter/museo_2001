@@ -36,7 +36,11 @@ class Curator
     photographs_by_artist.each do |artist, photos|
       photos.each {|photo| from_country << photo if artist.country == country}
     end
-    from_country 
+    from_country
+  end
+
+  def photographs_taken_between(range)
+    @photographs.select {|photo| range.include?(photo.year.to_i)}
   end
 
 end

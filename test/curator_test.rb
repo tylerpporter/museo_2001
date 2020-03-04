@@ -122,4 +122,13 @@ class CuratorTest < Minitest::Test
     assert_equal [], @curator.photographs_taken_by_artist_from("Argentina")
   end
 
+  def test_it_can_select_photos_taken_between_a_range_of_dates
+    @curator.add_photograph(@photo_1)
+    @curator.add_photograph(@photo_2)
+    @curator.add_photograph(@photo_3)
+    @curator.add_photograph(@photo_4)
+    assert_equal [@photo_1, @photo_2], @curator.photographs_taken_between(1940..1960)
+    assert_equal [], @curator.photographs_taken_between(1910..1915)
+  end
+
 end
