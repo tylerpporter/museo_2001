@@ -131,6 +131,12 @@ class CuratorTest < Minitest::Test
     assert_equal [], @curator.photographs_taken_between(1910..1915)
   end
 
+  def test_it_can_create_objects_from_csv
+    @curator.from_csv('./data/photographs.csv', Photograph, @curator.photographs)
+    assert_equal 4, @curator.photographs.size
+    assert_instance_of Photograph, @curator.photographs.sample
+  end
+
   def test_it_can_create_photograph_objects_from_csv
     @curator.load_photographs('./data/photographs.csv')
     assert_equal %w(1 2 3 4), @curator.photographs.map(&:id)
@@ -142,6 +148,17 @@ class CuratorTest < Minitest::Test
     @curator.load_artists('./data/artists.csv')
     assert_equal 6, @curator.artists.size
     assert_instance_of Artist, @curator.artists.sample
+  end
+
+  def test_it_can_sort_an_artists_photos_by_the_age_they_took_them
+    @curator.load_photographs('./data/photographs.csv')
+    @curator.load_artists('./data/artists.csv')
+    diane_arbus = @curator.find_artist_by_id("3")
+    expected = {
+      44=>"Identical Twins, Roselle, New Jersey",
+      39=>"Child with Toy Hand Grenade in Central Park"
+    }
+    assert_equal expected, @curator.artists_photographs_by_age(diane_arbus)
   end
 
 end

@@ -56,4 +56,13 @@ class Curator
     from_csv(file_path, Artist, @artists)
   end
 
+  def artists_photographs_by_age(artist)
+    photos_by_age = {}
+    photographs_by_artist[artist].each do |photo|
+      artist_age = photo.year.to_i - artist.born.to_i
+      photos_by_age[artist_age] = photo.name
+    end
+    photos_by_age 
+  end
+
 end
