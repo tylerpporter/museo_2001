@@ -23,7 +23,12 @@ class Curator
     @artists.inject({}) do |by_artist, artist|
       by_artist[artist] = @photographs.select {|photo| photo.artist_id == artist.id}
       by_artist
-    end 
+    end
+  end
+
+  def artists_with_multiple_photographs
+    artists = @artists.select {|artist| (photographs_by_artist[artist].size > 1)}
+    artists.map(&:name)
   end
 
 end
