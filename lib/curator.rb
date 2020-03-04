@@ -1,5 +1,6 @@
 require './lib/loadable.rb'
 require './lib/photograph.rb'
+require './lib/artist.rb'
 
 class Curator
   include Loadable
@@ -49,6 +50,10 @@ class Curator
 
   def load_photographs(file_path)
     from_csv(file_path, Photograph, @photographs)
+  end
+
+  def load_artists(file_path)
+    from_csv(file_path, Artist, @artists)
   end
 
 end

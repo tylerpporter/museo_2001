@@ -138,4 +138,10 @@ class CuratorTest < Minitest::Test
     assert_instance_of Photograph, @curator.photographs.sample
   end
 
+  def test_it_can_create_artist_objects_from_csv
+    @curator.load_artists('./data/artists.csv')
+    assert_equal 6, @curator.artists.size
+    assert_instance_of Artist, @curator.artists.sample
+  end
+
 end
