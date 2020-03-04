@@ -62,7 +62,7 @@ class Curator
       artist_age = photo.year.to_i - artist.born.to_i
       photos_by_age[artist_age] = photo.name
     end
-    photos_by_age 
+    photos_by_age
   end
 
 end
