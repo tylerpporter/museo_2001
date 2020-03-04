@@ -31,4 +31,12 @@ class Curator
     artists.map(&:name)
   end
 
+  def photographs_taken_by_artist_from(country)
+    from_country = []
+    photographs_by_artist.each do |artist, photos|
+      photos.each {|photo| from_country << photo if artist.country == country}
+    end
+    from_country 
+  end
+
 end
